@@ -1,0 +1,25 @@
+.display {
+    position: relative;
+    z-index: 1;
+    margin: auto;
+    margin-top: 3rem;
+    width: 80%;
+    height: 80vh;
+    text-align: center;
+    background-color: white;
+    border: 3px solid #000;
+}
+
+.windDirection {
+    font-size: 3rem;
+}
+
+.timestamp {
+    font-size: 2rem;
+}
+
+.error {
+    font-size: 5rem;
+    margin-top: 20%;
+    color: red;
+}

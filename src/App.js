@@ -1,28 +1,69 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
+import Aux from './hoc/Aux';
+import Header from './components/Header/Header';
+import Display from './components/Display/Display';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+
+    state = {
+        cities: [],
+        currentCity: 0,
+    };
+
+    componentDidMount() {
+        this.refresh();
+    }
+
+    componentDidUpdate() {
+        setTimeout(this.changeCity, 3000);
+        console.log(this.state.cities[this.state.currentCity]);
+    };
+
+    refresh = () => {
+        axios.get('/weather-reports')
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    cities: response.data,
+                    currentCity: 0,
+                })
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    changeCity = () => {
+        if (this.state.currentCity === this.state.cities.length - 1) {
+            this.refresh();
+        }
+        else {
+            let newCount = this.state.currentCity + 1;
+            this.setState({
+                currentCity: newCount,
+            })
+        }
+    };
+
+
+    render() {
+        return(
+            <Aux>
+                <Header
+                    cities={this.state.cities}
+                    currentCity={this.state.currentCity}
+                />
+            {this.state.cities[this.state.currentCity] ? (
+                <Display
+                    currentCity={this.state.cities[this.state.currentCity]}
+                />
+            ): null }
+            </Aux>
+        );
+    };
+
+};
 
 export default App;

@@ -1,0 +1,17 @@
+.header {
+    text-align: center;
+}
+
+.city {
+    display: inline;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+}
+
+.highlightedCity {
+    display: inline;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+    text-decoration: underline;
+    font-size: 3rem;
+}
